@@ -8,15 +8,17 @@ public class Account {
         this.name = name;
     }
 
+    /* Метод проверки соответствия имени поставленным требованиям:
+    name не null
+    (?=.{3,19}$) - длина строки 3-19 символов
+    ^[a-zA-Z0-9А-Яа-я()]+ - начинается не с пробела
+    \\s - в строке присутствует один пробел
+    [a-zA-Z0-9А-Яа-я()]+$ - заканчивается не пробелом
+     */
     public boolean checkNameToEmboss() {
-        if (name == null) return false;
-        if (name.length() < 3 | name.length() > 19) return false;
-        if (name.startsWith(" ") | name.endsWith(" ")) return false;
-        int spaceCount = 0;
-        for (char ch : name.toCharArray()) {
-            if (ch == ' ') spaceCount++;
+        if (name == null) {
+            return false;
         }
-        return spaceCount == 1;
+        return name.matches("(?=.{3,19}$)^[a-zA-Z0-9А-Яа-я()]+\\s[a-zA-Z0-9А-Яа-я()]+$");
     }
-
 }
